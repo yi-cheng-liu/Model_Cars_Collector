@@ -36,3 +36,54 @@ class diecast(models.Model):
     
     def __str__(self) -> str:
         return self.title
+    
+# Category
+class Category(models.Model):
+    title=models.CharField(max_length=100)
+    image=models.ImageField(upload_to="cat_imgs/")
+
+    class Meta:
+        verbose_name_plural='2. Categories'
+
+    def __str__(self):
+        return self.title
+
+# Brand
+class Brand(models.Model):
+    title=models.CharField(max_length=100)
+    image=models.ImageField(upload_to="brand_imgs/")
+
+    class Meta:
+        verbose_name_plural='3. Brands'
+
+    def __str__(self):
+        return self.title
+    
+# Product Model
+class Product(models.Model):
+    title=models.CharField(max_length=200)
+    slug=models.CharField(max_length=400)
+    detail=models.TextField()
+    specs=models.TextField()
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    brand=models.ForeignKey(Brand,on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    is_featured=models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural='6. Products'
+
+    def __str__(self):
+        return self.title
+
+# Product Attribute
+class ProductAttribute(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    price=models.PositiveIntegerField(default=0)
+    image=models.ImageField(upload_to="product_imgs/",null=True)
+
+    class Meta:
+        verbose_name_plural='7. ProductAttributes'
+
+    def __str__(self):
+        return self.product.title
