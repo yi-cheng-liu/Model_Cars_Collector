@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-&*n=j7x6ncy=ns$m%0!&!ki7$x^!wb^@qdo3q9uthuzww8%x3&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0']
 
 
 # Application definition
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     # Apps
     "main",
     'django_extensions',
-    # 'pygraphviz',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +59,7 @@ ROOT_URLCONF = "model_car_collector.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -121,7 +120,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/main/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "main/static",
+    # Add any additional directories where static files are stored
+]
+
+STATIC_ROOT = "/var/www/example.com/static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
