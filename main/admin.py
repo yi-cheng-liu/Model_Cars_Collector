@@ -18,8 +18,8 @@ class DiecastAdmin(admin.ModelAdmin):
     form = DiecastAdminForm
     
     def picture_preview(self, obj):
-        if obj.picture:
-            return format_html('<img src="{}" height="80"/>', obj.picture.url)
+        if obj.picture1:
+            return format_html('<img src="{}" height="80"/>', obj.picture1.url)
         return None
 
     picture_preview.short_description = 'Picture Preview'
@@ -27,9 +27,15 @@ class DiecastAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
-        if 'picture' in request.FILES:
-            obj.picture = request.FILES['picture']
-            obj.save()
+        if 'picture1' in request.FILES:
+            obj.picture1 = request.FILES['picture1']
+        if 'picture2' in request.FILES:
+            obj.picture2 = request.FILES['picture2']
+        if 'picture3' in request.FILES:
+            obj.picture3 = request.FILES['picture3']
+        if 'picture4' in request.FILES:
+            obj.picture4 = request.FILES['picture4']
+        obj.save()
 
 class ManufacturerAdminForm(forms.ModelForm):
     picture = forms.ImageField(required=False)

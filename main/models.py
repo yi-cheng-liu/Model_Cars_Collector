@@ -75,7 +75,10 @@ class Diecast(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     # Picture
-    picture = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    picture1 = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    picture2 = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    picture3 = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    picture4 = models.ImageField(upload_to='pictures/', null=True, blank=True)
 
     # Slug
     slug = models.SlugField(max_length=255, default='', blank=True, help_text="DON'T NEED TO FILL IN")
