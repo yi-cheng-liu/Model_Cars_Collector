@@ -51,9 +51,24 @@ class ManufacturerAdmin(admin.ModelAdmin):
     picture_preview.short_description = 'Logo'
     picture_preview.allow_tags = True
 
+class VehicleBrandAdminForm(forms.ModelForm):
+    picture = forms.ImageField(required=False)
+    class Meta:
+        model = VehicleBrand
+        fields = '__all__'
 @admin.register(VehicleBrand)
 class VehicleBrandAdmin(admin.ModelAdmin):
     ordering = ('name',)
+    form = VehicleBrandAdminForm
+    list_display = ('name', 'picture_preview')
+
+    def picture_preview(self, obj):
+        if obj.picture:
+            return format_html('<img src="{}" height="80"/>', obj.picture.url)
+        return None
+
+    picture_preview.short_description = 'Logo'
+    picture_preview.allow_tags = True
 
 @admin.register(Scale)
 class ScaleAdmin(admin.ModelAdmin):
