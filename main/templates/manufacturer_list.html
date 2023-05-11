@@ -168,38 +168,14 @@
                         </div>
                     </div>
                     
-                    {% for diecast in diecasts %}
+                    {% for manufacturer in manufacturers %}
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture }}" alt="{{ MEDIA_URL }}{{ diecast.picture }}">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href="{% url 'detail' diecast.manufacturer %}"><i class="fas fa-car"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                </div>
+                                <img class="img-fluid w-100" src="{{ MEDIA_URL }}" alt="{{ MEDIA_URL }}">
                             </div>
                             <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer %}">{{ diecast.vehicle_name }}</a>
-                                <div class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-list' %}">{{ diecast.manufacturer }}</div>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    {% if diecast.on_sale %}
-                                    <h5>${{ diecast.on_sale_price }}</h5>
-                                    <h6 class="text-muted ml-2"><del>{{ diecast.retail_price }}</del></h6>
-                                    {% endif %}
-
-                                    {% if not diecast.on_sale %}
-                                    <h5>${{ diecast.retail_price }}</h5>
-                                    {% endif %}
-                                </div>
-                                <!-- <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div> -->
+                                <a class="h4 text-decoration-none text-truncate" href="">{{ manufacturer.name }}</a>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 
-from .models import Diecast
+from .models import Diecast, Manufacturer, VehicleBrand, Scale
 from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
 					FACEBOOK_URL, GOOGLE_MAPS_URL, INSTAGRAM_URL
@@ -24,23 +25,48 @@ def home(request):
 	return render(request, 'index.html', context)
 
 # Product List Page
+def manufacturer_list(request):
+	manufacturers = Manufacturer.objects.all()
+	ctx = {'manufacturers': manufacturers, **common_context}
+	return render(request,'manufacturer_list.html', ctx)
+
+# Product List Page
 def product_list(request):
-	context = common_context.copy()
 	diecasts = Diecast.objects.all()
-	ctx = {'diecasts': diecasts, **context}
+	ctx = {'diecasts': diecasts, **common_context}
 	return render(request,'product_list.html', ctx)
+
+# Detail Page
+def detail(request, manufacturer):
+	diecast = get_object_or_404(Diecast, manufacturer__name=manufacturer)
+	ctx = {'diecast': diecast, **common_context}
+	return render(request, 'detail.html', ctx)
 
 # Cart Page
 def cart(request):
-	context = common_context.copy()
-	return render(request, 'cart.html', context)
+	ctx = {**common_context}
+	return render(request, 'cart.html', ctx)
 
 # Checkout Page
 def checkout(request):
-	context = common_context.copy()
-	return render(request, 'checkout.html', context)
+	ctx = {**common_context}
+	return render(request, 'checkout.html', ctx)
 
 # Contact Page
 def contact(request):
-	context = common_context.copy()
-	return render(request, 'contact.html', context)
+	ctx = {**common_context}
+	return render(request, 'contact.html', ctx)
+
+# About us Page
+def about(request):
+	vehicle_brands = VehicleBrand.objects.all()
+	ctx = {'vehicle_brands': vehicle_brands, **common_context}
+	return render(request, 'about.html', ctx)
+
+def stream_file(request, pk):
+    diecast = get_object_or_404(Diecast, id=pk)
+    response = HttpResponse()
+    response['Content-Type'] = diecast.picture_content_type
+    response['Content-Length'] = len(diecast.picture)
+    response.write(diecast.picture)
+    return response

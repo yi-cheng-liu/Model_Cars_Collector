@@ -48,7 +48,7 @@
         </div>
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
+                <a href="{% url 'home' %}" class="text-decoration-none">
                     <span class="h1 text-uppercase text-primary bg-dark px-2">Model Car</span>
                     <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Collector</span>
                 </a>
@@ -89,27 +89,28 @@
                         <div class="nav-item dropdown dropright">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manufacturer<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">MiniChamps</a>
-                                <a href="" class="dropdown-item">Autoart</a>
+                                {% for manufacturer in manufacturers %}
+                                <a href="" class="dropdown-item">{{ manufacturer.name }}</a>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="nav-item dropdown dropright">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">Audi</a>
-                                <a href="" class="dropdown-item">BMW</a>
-                                <a href="" class="dropdown-item">Ferrari</a>
+                                {% for vehicle_brand in vehicle_brands %}
+                                <a href="" class="dropdown-item">{{ vehicle_brand.name }}</a>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="nav-item dropdown dropright">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Scale<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">1:18</a>
-                                <a href="" class="dropdown-item">1:43</a>
+                                {% for scale in scales %}
+                                <a href="" class="dropdown-item">{{ scale.name }}</a>
+                                {% endfor %}
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">Car</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
+                        <a href="" class="nav-item nav-link">Accessories</a>
                     </div>
                 </nav>
             </div>
@@ -125,8 +126,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'product-list' %}" class="nav-item nav-link">Product</a>
-                            <a href="{% url 'product-list' %}" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{% url 'product-list' %}" class="nav-item nav-link">All Product</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
@@ -135,6 +135,7 @@
                                 </div>
                             </div>
                             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link">About us</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -154,10 +155,11 @@
     {% endblock %}
     <!-- Navbar End -->
 
-
     {% block content %}
     
     {% endblock %}
+
+    
 
     <!-- Footer Start -->
     {% block footer %}

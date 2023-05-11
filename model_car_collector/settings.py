@@ -67,6 +67,11 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
+
+                'model_car_collector.context_processors.manufacturers',
+                'model_car_collector.context_processors.vehicle_brands',
+                'model_car_collector.context_processors.scales',
             ],
         },
     },
@@ -120,14 +125,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "/main/static/"
+
 
 STATICFILES_DIRS = [
     BASE_DIR / "main/static",
-    # Add any additional directories where static files are stored
 ]
+# STATIC_ROOT = "/var/www/example.com/static/"
+STATIC_URL = "/main/static/"
 
-STATIC_ROOT = "/var/www/example.com/static/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
+MEDIA_URL = '/main/media/'
 
 
 # Default primary key field type

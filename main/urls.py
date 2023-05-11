@@ -6,8 +6,14 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('product-list',views.product_list,name='product-list'),
-    path('cart',views.cart,name='cart'),
-    path('checkout',views.checkout,name='checkout'),
-    path('contact',views.contact,name='contact'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('manufacturer-list',views.manufacturer_list, name='manufacturer-list'),
+    path('product-list',views.product_list, name='product-list'),
+    path('<str:manufacturer>/',views.detail, name='detail'),
+    path('cart',views.cart, name='cart'),
+    path('checkout',views.checkout, name='checkout'),
+    path('contact',views.contact, name='contact'),
+    path('about',views.about, name='about'),
+] 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
