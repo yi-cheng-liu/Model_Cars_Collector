@@ -127,12 +127,12 @@ USE_TZ = True
 
 
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / "main/static",
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main')
+]
 # STATIC_ROOT = "/var/www/example.com/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
-STATIC_URL = "/main/static/"
+STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
 MEDIA_URL = '/main/media/'
