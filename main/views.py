@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale
 from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
@@ -21,8 +22,9 @@ common_context = {
 
 # Home Page
 def home(request):
-	context = common_context.copy()
-	return render(request, 'index.html', context)
+	diecasts = Diecast.objects.all()
+	ctx = {'diecasts': diecasts, **common_context}
+	return render(request, 'index.html', ctx)
 
 # Manufacturer List Page
 def manufacturer_list(request):
@@ -33,7 +35,40 @@ def manufacturer_list(request):
 # Product List Page
 def product_list(request):
 	diecasts = Diecast.objects.all()
-	ctx = {'diecasts': diecasts, **common_context}
+	manufacturers = Manufacturer.objects.all()
+	scales = Scale.objects.all()
+
+	# Sort products
+	sort = request.GET.get('sort')
+	if sort == 'ascending':
+		diecasts = diecasts.order_by('created_at')
+	elif sort == 'descending':
+		diecasts = diecasts.order_by('-created_at')
+	elif sort == 'price_ascending':
+		diecasts = diecasts.order_by('on_sale_price')
+	elif sort == 'price_descending':
+		diecasts = diecasts.order_by('-on_sale_price')
+		
+	# Limit number of items
+	limit = request.GET.get('limit')
+	if limit:
+		diecasts = diecasts[:int(limit)]
+	else:
+		limit = 20
+
+	# Pagination
+	paginator = Paginator(diecasts, limit)
+	page_number = request.GET.get('page')
+	diecasts = paginator.get_page(page_number)
+
+	ctx = {
+        'diecasts': diecasts,
+        'manufacturers': manufacturers,
+        'scales': scales,
+		'sort': sort,
+        'limit': limit,
+        **common_context
+    }
 	return render(request,'product_list.html', ctx)
 
 # Detail Page

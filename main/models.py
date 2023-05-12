@@ -4,18 +4,22 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.utils.text import slugify
 
-from datetime import datetime
-
-current_year = datetime.now().year
-
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=30,
         validators=[MinLengthValidator(2, "Manufacturer must be greater than 2 characters"),
                     MaxLengthValidator(30, "Manufacturer must be less than 30 characters")])
     slug = models.SlugField(max_length=255, default='', blank=True, help_text="DON'T NEED TO FILL IN")
+
+    # Hidden information
+    important = models.BooleanField(default=False)
+
     # Picture
     picture = models.ImageField(upload_to='manufacturer/', null=True, blank=True)
+
+    
 
     def __str__(self):
         return self.name
@@ -61,8 +65,8 @@ class Diecast(models.Model):
     retail_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     on_sale = models.BooleanField(default=False)
     on_sale_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, help_text="ON SALE: on sale price < retail price")
-    production_year = models.IntegerField(default=current_year,
-            validators=[MinValueValidator(1800), MaxValueValidator(current_year)])    
+    production_year = models.IntegerField(default=datetime.now().year,
+            validators=[MinValueValidator(1800), MaxValueValidator(datetime.now().year)])    
     color = models.CharField(max_length=15)
     text = models.TextField(null=True, blank=True)
 
@@ -93,6 +97,10 @@ class Diecast(models.Model):
     def is_valid_on_sale_price(self):
         if self.on_sale and self.on_sale_price and self.retail_price and self.on_sale_price >= self.retail_price:
             raise ValidationError("The product is on sale!!! The on sale price must be lower than the retail price.")
+    
+    def is_recent(self):
+        three_months_ago = timezone.now() - timezone.timedelta(days=90)
+        return self.created_at >= three_months_ago
     
     def clean(self):
         super().clean()
