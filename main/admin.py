@@ -35,6 +35,14 @@ class DiecastAdmin(admin.ModelAdmin):
             obj.picture3 = request.FILES['picture3']
         if 'picture4' in request.FILES:
             obj.picture4 = request.FILES['picture4']
+        if 'picture5' in request.FILES:
+            obj.picture5 = request.FILES['picture5']
+        if 'picture6' in request.FILES:
+            obj.picture6 = request.FILES['picture6']
+        if 'picture7' in request.FILES:
+            obj.picture7 = request.FILES['picture7']
+        if 'picture8' in request.FILES:
+            obj.picture8 = request.FILES['picture8']
         obj.save()
 
 class ManufacturerAdminForm(forms.ModelForm):

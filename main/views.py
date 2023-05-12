@@ -24,7 +24,7 @@ def home(request):
 	context = common_context.copy()
 	return render(request, 'index.html', context)
 
-# Product List Page
+# Manufacturer List Page
 def manufacturer_list(request):
 	manufacturers = Manufacturer.objects.all()
 	ctx = {'manufacturers': manufacturers, **common_context}
@@ -37,8 +37,8 @@ def product_list(request):
 	return render(request,'product_list.html', ctx)
 
 # Detail Page
-def detail(request, manufacturer):
-	diecast = get_object_or_404(Diecast, manufacturer__name=manufacturer)
+def detail(request, manufacturer, slug):
+	diecast = get_object_or_404(Diecast, manufacturer__slug=manufacturer, slug=slug)
 	ctx = {'diecast': diecast, **common_context}
 	return render(request, 'detail.html', ctx)
 
