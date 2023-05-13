@@ -21,19 +21,10 @@ common_context = {
 	'instagram': INSTAGRAM_URL,
 }
 
-def apply_search_filter(queryset, search_query):
-    if search_query:
-        queryset = queryset.filter(title__icontains=search_query)
-    return queryset
 
 # Home Page
 def home(request):
 	diecasts = Diecast.objects.all()
-
-	# Apply search query filter if it exists
-	search_query = request.GET.get('search_query')
-	diecasts = apply_search_filter(diecasts, search_query)
-
 	ctx = {'diecasts': diecasts, **common_context}
 	return render(request, 'index.html', ctx)
 
@@ -82,7 +73,8 @@ def product_list(request):
 
 	# Apply search query filter if it exists
 	search_query = request.GET.get('search_query')
-	diecasts = apply_search_filter(diecasts, search_query)
+	if search_query:
+		diecasts = diecasts.filter(title__icontains=search_query)
 
 	# Pagination
 	page_number = request.GET.get('page')
@@ -104,13 +96,7 @@ def product_list(request):
 # Detail Page
 def detail(request, manufacturer, slug):
 	diecast = get_object_or_404(Diecast, manufacturer__slug=manufacturer, slug=slug)
-
-	# Apply search query filter if it exists
-	diecasts = Diecast.objects.all()
-	search_query = request.GET.get('search_query')
-	diecasts = apply_search_filter(diecasts, search_query)
-
-	ctx = {'diecasts' : diecasts, 'diecast': diecast, **common_context}
+	ctx = {'diecast': diecast, **common_context}
 	return render(request, 'detail.html', ctx)
 
 # Cart Page
@@ -125,12 +111,7 @@ def checkout(request):
 
 # Contact Page
 def contact(request):
-	diecasts = Diecast.objects.all()
-
-	# Apply search query filter if it exists
-	search_query = request.GET.get('search_query')
-	diecasts = apply_search_filter(diecasts, search_query)
-	
+	diecasts = Diecast.objects.all()	
 	ctx = {'diecasts': diecasts, **common_context}
 	return render(request, 'contact.html', ctx)
 

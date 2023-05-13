@@ -55,13 +55,13 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="{% url 'product-list' %}">
+                <form id="search-form" action="{% url 'product-list' %}">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search_query" placeholder="Search for products">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
+                            <button class="input-group-text bg-transparent text-primary search-icon">
                                 <i class="fa fa-search"></i>
-                            </span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -126,17 +126,17 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'product-list' %}" class="nav-item nav-link">All Product</a>
+                            <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                            <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}active{% endif %}">All Product</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/checkout/' %}active{% endif %}" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="{% url 'cart' %}" class="dropdown-item">Shopping Cart</a>
-                                    <a href="{% url 'checkout' %}" class="dropdown-item">Checkout</a>
+                                    <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}active{% endif %}">Shopping Cart</a>
+                                    <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/checkout/' %}active{% endif %}">Checkout</a>
                                 </div>
                             </div>
-                            <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                            <a href="{% url 'about' %}" class="nav-item nav-link">About us</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}active{% endif %}">About us</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -233,3 +233,14 @@
     </div>
     {% endblock %}
     <!-- Footer End -->
+
+    <script>
+    const searchIcon = document.querySelector('.search-icon');
+    const searchForm = document.getElementById('search-form');
+
+    searchIcon.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default click behavior
+
+        searchForm.submit(); // Submit the form
+    });
+    </script>
