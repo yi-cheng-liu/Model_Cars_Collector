@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     # Apps
-    "main",
+    'main.apps.MainConfig',
     'django_extensions',
 ]
 

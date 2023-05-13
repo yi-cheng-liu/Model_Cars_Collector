@@ -64,7 +64,7 @@ class Diecast(models.Model):
     buying_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     retail_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     on_sale = models.BooleanField(default=False)
-    on_sale_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, help_text="ON SALE: on sale price < retail price")
+    on_sale_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank = True, help_text="ON SALE: on sale price < retail price")
     production_year = models.IntegerField(default=datetime.now().year,
             validators=[MinValueValidator(1800), MaxValueValidator(datetime.now().year)])    
     color = models.CharField(max_length=15)
@@ -109,4 +109,8 @@ class Diecast(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+            
+        # Force on_sale_price to be the same as retail_price when on_sale is False
+        if not self.on_sale:
+            self.on_sale_price = self.retail_price
         super().save(*args, **kwargs)

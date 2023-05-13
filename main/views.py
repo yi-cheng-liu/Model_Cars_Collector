@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale
 from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
@@ -36,19 +37,32 @@ def manufacturer_list(request):
 def product_list(request):
 	diecasts = Diecast.objects.all()
 	manufacturers = Manufacturer.objects.all()
+	vehicle_brands = VehicleBrand.objects.all()
 	scales = Scale.objects.all()
 
 	# Sort products
 	sort = request.GET.get('sort')
-	if sort == 'ascending':
+	if sort == 'oldest':
 		diecasts = diecasts.order_by('created_at')
-	elif sort == 'descending':
+	elif sort == 'latest':
 		diecasts = diecasts.order_by('-created_at')
 	elif sort == 'price_ascending':
 		diecasts = diecasts.order_by('on_sale_price')
 	elif sort == 'price_descending':
 		diecasts = diecasts.order_by('-on_sale_price')
-		
+	else:
+		diecasts = diecasts.order_by('-created_at')
+
+	featured = request.GET.get('featured')
+	if featured == 'featured':
+		diecasts = diecasts.filter(featured=True)
+	elif featured == 'on_sale':
+		diecasts == diecasts.filter(on_sale=True)
+	elif featured == 'featured_on_sale':
+		diecasts = diecasts.filter(featured=True, on_sale=True)
+	else:
+		diecasts = diecasts
+
 	# Limit number of items
 	limit = request.GET.get('limit')
 	if limit:
@@ -57,16 +71,18 @@ def product_list(request):
 		limit = 20
 
 	# Pagination
-	paginator = Paginator(diecasts, limit)
 	page_number = request.GET.get('page')
+	paginator = Paginator(diecasts, limit)
 	diecasts = paginator.get_page(page_number)
 
 	ctx = {
         'diecasts': diecasts,
         'manufacturers': manufacturers,
+		'vehicle_brands' : vehicle_brands,
         'scales': scales,
 		'sort': sort,
         'limit': limit,
+		'page_number': page_number,
         **common_context
     }
 	return render(request,'product_list.html', ctx)
@@ -97,11 +113,3 @@ def about(request):
 	vehicle_brands = VehicleBrand.objects.all()
 	ctx = {'vehicle_brands': vehicle_brands, **common_context}
 	return render(request, 'about.html', ctx)
-
-def stream_file(request, pk):
-    diecast = get_object_or_404(Diecast, id=pk)
-    response = HttpResponse()
-    response['Content-Type'] = diecast.picture_content_type
-    response['Content-Length'] = len(diecast.picture)
-    response.write(diecast.picture)
-    return response
