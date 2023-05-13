@@ -48,8 +48,15 @@ class VehicleBrand(models.Model):
     
 class Scale(models.Model):
     name = models.CharField(max_length=5)
+    slug = models.SlugField(max_length=255, default='', blank=True, help_text="DON'T NEED TO FILL IN")
+
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class Diecast(models.Model):
     title = models.CharField(max_length=100, 
@@ -109,7 +116,7 @@ class Diecast(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-            
+
         # Force on_sale_price to be the same as retail_price when on_sale is False
         if not self.on_sale:
             self.on_sale_price = self.retail_price

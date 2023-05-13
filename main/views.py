@@ -1,7 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from django.db.models import Count
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale
 from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
@@ -33,6 +31,27 @@ def manufacturer_list(request):
 	manufacturers = Manufacturer.objects.all()
 	ctx = {'manufacturers': manufacturers, **common_context}
 	return render(request,'manufacturer_list.html', ctx)
+
+# Manufacturer Specific Page
+def manufacturer_specific(request, manufacturer):
+	manufacturer_obj = get_object_or_404(Manufacturer, slug=manufacturer)
+	diecasts = Diecast.objects.filter(manufacturer=manufacturer_obj)
+	ctx = {'diecasts': diecasts, 'manufacturer': manufacturer_obj, **common_context}
+	return render(request,'product_list.html', ctx)
+
+# Vehicle Brand Specific Page
+def vehicle_brand_specific(request, vehicle_brand):
+	vehicle_brand_obj = get_object_or_404(VehicleBrand, slug=vehicle_brand)
+	diecasts = Diecast.objects.filter(vehicle_brand=vehicle_brand_obj)
+	ctx = {'diecasts': diecasts, 'vehicle_brand_obj': vehicle_brand_obj, **common_context}
+	return render(request,'product_list.html', ctx)
+
+# Scale Specific Page
+def scale_specific(request, scale):
+	scale_obj = get_object_or_404(Scale, slug=scale)
+	diecasts = Diecast.objects.filter(scale=scale_obj)
+	ctx = {'diecasts': diecasts, 'scale_obj': scale_obj, **common_context}
+	return render(request,'product_list.html', ctx)
 
 # Product List Page
 def product_list(request):

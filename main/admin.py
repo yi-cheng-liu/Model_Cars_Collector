@@ -11,7 +11,7 @@ class DiecastAdminForm(forms.ModelForm):
         
 @admin.register(Diecast)
 class DiecastAdmin(admin.ModelAdmin):
-    list_display = ('vehicle_name', 'manufacturer', 'vehicle_brand', 'scale', 'buying_price', 'retail_price', 'inventory', 'sold', 'featured', 'on_sale', 'picture_preview')
+    list_display = ('vehicle_name', 'manufacturer', 'vehicle_brand', 'scale', 'retail_price', 'on_sale_price', 'inventory', 'sold', 'featured', 'on_sale', 'picture_preview')
     list_filter = ('manufacturer','featured', 'on_sale',)
     search_fields = ['vehicle_name', 'manufacturer__name', 'vehicle_brand__name']
     

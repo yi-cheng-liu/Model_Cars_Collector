@@ -91,7 +91,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manufacturer<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for manufacturer in manufacturers %}
-                                <a href="" class="dropdown-item">{{ manufacturer.name }}</a>
+                                <a href="{% url 'manufacturer-specific' manufacturer.slug %}" class="dropdown-item">{{ manufacturer.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for vehicle_brand in vehicle_brands %}
-                                <a href="" class="dropdown-item">{{ vehicle_brand.name }}</a>
+                                <a href="{% url 'vehicle-brand-specific' vehicle_brand.slug %}" class="dropdown-item">{{ vehicle_brand.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Scale<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for scale in scales %}
-                                <a href="" class="dropdown-item">{{ scale.name }}</a>
+                                <a href="{% url 'scale-specific' scale.slug %}" class="dropdown-item">{{ scale.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -128,11 +128,12 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
                             <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}active{% endif %}">All Product</a>
+                            <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}active{% endif %}">All Manufacturer</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/checkout/' %}active{% endif %}" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}active{% endif %}" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                     <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}active{% endif %}">Shopping Cart</a>
-                                    <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/checkout/' %}active{% endif %}">Checkout</a>
+                                    <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/cart/checkout/' %}active{% endif %}">Checkout</a>
                                 </div>
                             </div>
                             <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
@@ -210,10 +211,9 @@
                         </form>
                         <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6> -->
                         <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="{{ facebook }}"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="{{ instagram }}"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="{{ google_maps }}"><i class="fas fa-map-marker-alt"></i></a>
-
+                            <a class="btn btn-primary btn-square mr-2" href="{{ facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="{{ instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="{{ google_maps }}" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
                 </div>
