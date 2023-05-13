@@ -71,6 +71,7 @@ class Diecast(models.Model):
     buying_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     retail_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     on_sale = models.BooleanField(default=False)
+    on_sale_home = models.BooleanField(default=False)
     on_sale_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank = True, help_text="ON SALE: on sale price < retail price")
     production_year = models.IntegerField(default=datetime.now().year,
             validators=[MinValueValidator(1800), MaxValueValidator(datetime.now().year)])    
