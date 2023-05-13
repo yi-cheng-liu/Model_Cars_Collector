@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Manufacturer, VehicleBrand, Scale, Diecast
+from .models import Manufacturer, VehicleBrand, Scale, Diecast, CarouselItem
 
 class DiecastAdminForm(forms.ModelForm):
     class Meta:
@@ -50,7 +50,6 @@ class ManufacturerAdminForm(forms.ModelForm):
     class Meta:
         model = Manufacturer
         fields = '__all__'
-
 @admin.register(Manufacturer)
 class ManufacturerAdmin(admin.ModelAdmin):
     ordering = ('name',)
@@ -87,3 +86,22 @@ class VehicleBrandAdmin(admin.ModelAdmin):
 @admin.register(Scale)
 class ScaleAdmin(admin.ModelAdmin):
     ordering = ('name',)
+
+class CarouselItemAdminForm(forms.ModelForm):
+    picture = forms.ImageField(required=False)
+    class Meta:
+        model = CarouselItem
+        fields = '__all__'
+@admin.register(CarouselItem)
+class CarouselItemAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+    form = CarouselItemAdminForm
+    list_display = ('name', 'picture_preview')
+
+    def picture_preview(self, obj):
+        if obj.picture:
+            return format_html('<img src="{}" height="80"/>', obj.picture.url)
+        return None
+
+    picture_preview.short_description = 'Carousel Picture'
+    picture_preview.allow_tags = True

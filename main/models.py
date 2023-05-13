@@ -121,3 +121,11 @@ class Diecast(models.Model):
         if not self.on_sale:
             self.on_sale_price = self.retail_price
         super().save(*args, **kwargs)
+
+class CarouselItem(models.Model):
+    name = models.CharField(max_length=100)
+    picture = models.ImageField(upload_to='carousel/', null=True)
+    caption = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.caption

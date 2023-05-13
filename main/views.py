@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
-from .models import Diecast, Manufacturer, VehicleBrand, Scale
+from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem
 from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
 					FACEBOOK_URL, GOOGLE_MAPS_URL, INSTAGRAM_URL
@@ -23,7 +23,8 @@ common_context = {
 # Home Page
 def home(request):
 	diecasts = Diecast.objects.all()
-	ctx = {'diecasts': diecasts, **common_context}
+	carousel_items = CarouselItem.objects.all()
+	ctx = {'diecasts': diecasts, 'carousel_items' : carousel_items, **common_context}
 	return render(request, 'index.html', ctx)
 
 # Manufacturer List Page
