@@ -83,7 +83,12 @@
                         </div>
                         <small class="pt-1">(99 Reviews)</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">${{ diecast.retail_price|intcomma }}</h3>
+                    {% if diecast.on_sale %}
+                        <h3 class="font-weight-semi-bold">${{ diecast.on_sale_price|intcomma }}</h3>
+                        <h4 class="font-weight-semi-bold mb-4"><del>${{ diecast.retail_price|intcomma }}</del></h4>
+                    {% else %}
+                        <h3 class="font-weight-semi-bold mb-4">${{ diecast.on_sale_price|intcomma }}</h3>
+                    {% endif %}
                     <p class="mb-4">{{ diecast.text }}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Vehicle:</strong>{{ diecast.vehicle_name }}
@@ -129,18 +134,18 @@
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-minus">
+                                <button class="btn btn-secondary btn-minus">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
                             <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-plus">
+                                <button class="btn btn-secondary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                        <button class="btn btn-secondary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
@@ -215,7 +220,7 @@
                                         <img src="{% static 'img/user.jpg' %}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                         <div class="media-body">
                                             <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                            <div class="text-primary mb-2">
+                                            <div class="text-secondary mb-2">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -231,7 +236,7 @@
                                     <small>Your email address will not be published. Required fields are marked *</small>
                                     <div class="d-flex my-3">
                                         <p class="mb-0 mr-2">Your Rating * :</p>
-                                        <div class="text-primary">
+                                        <div class="text-secondary">
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
@@ -253,7 +258,7 @@
                                             <input type="email" class="form-control" id="email">
                                         </div>
                                         <div class="form-group mb-0">
-                                            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                            <input type="submit" value="Leave Your Review" class="btn btn-secondary px-3">
                                         </div>
                                     </form>
                                 </div>
@@ -287,11 +292,11 @@
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
                                 <small>(99)</small>
                             </div>
                         </div>
@@ -312,11 +317,11 @@
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
                                 <small>(99)</small>
                             </div>
                         </div>
@@ -337,11 +342,11 @@
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
                                 <small>(99)</small>
                             </div>
                         </div>
@@ -362,11 +367,11 @@
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
                                 <small>(99)</small>
                             </div>
                         </div>
@@ -387,11 +392,11 @@
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
+                                <small class="fa fa-star text-secondary mr-1"></small>
                                 <small>(99)</small>
                             </div>
                         </div>

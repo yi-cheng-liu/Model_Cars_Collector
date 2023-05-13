@@ -2,7 +2,7 @@
 
 ## The outlet of the page
 # Topbar
-TOPBAR_1 = 'About'
+TOPBAR_1 = 'Delivery and Returns'
 
 # Footer
 EMAIL_ADDRESS = 'pagani3321@gmail.com'
