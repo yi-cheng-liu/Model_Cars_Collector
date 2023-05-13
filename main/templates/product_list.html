@@ -11,6 +11,11 @@
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="{% url 'home' %}">Home</a>
                     <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">All Product</a>
+                    {% for manufacturer in manufacturers %}
+                        {% if request.path == '/product-list/'|add:manufacturer.slug|add:'/' %}
+                            <a class="breadcrumb-item text-dark" href="{% url 'manufacturer-specific' manufacturer.slug %}">{{ manufacturer.name }}</a>
+                        {% endif %}
+                    {% endfor %}
                 </nav>
             </div>
         </div>
@@ -100,20 +105,13 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="?sort=oldest&limit={{ limit }}&featured={{ featured }}">Oldest</a>
-                                        <a class="dropdown-item" href="?sort=latest&limit={{ limit }}&featured={{ featured }}">Latest</a>
-                                        <a class="dropdown-item" href="?sort=price_ascending&limit={{ limit }}&featured={{ featured }}">Price (Low -> High)</a>
-                                        <a class="dropdown-item" href="?sort=price_descending&limit={{ limit }}&featured={{ featured }}">Price (High -> Low)</a>
+                                        <a class="dropdown-item" href="?sort=featured&limit={{ limit }}">Featured</a>
+                                        <a class="dropdown-item" href="?sort=oldest&limit={{ limit }}">Oldest</a>
+                                        <a class="dropdown-item" href="?sort=latest&limit={{ limit }}">Latest</a>
+                                        <a class="dropdown-item" href="?sort=price_ascending&limit={{ limit }}">Price (Low -> High)</a>
+                                        <a class="dropdown-item" href="?sort=price_descending&limit={{ limit }}">Price (High -> Low)</a>
+                                        <a class="dropdown-item" href="?sort=on_sale&limit={{ limit }}">On Sale</a>
                                         <a class="dropdown-item" href="#">Best Rating</a>
-                                    </div>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" id="featured-button">Featured</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="?sort={{ sort }}&limit={{ limit }}">All items</a>
-                                        <a class="dropdown-item" href="?sort={{ sort }}&limit={{ limit }}&featured=featured">Featured</a>
-                                        <a class="dropdown-item" href="?sort={{ sort }}&limit={{ limit }}&featured=on_sale">On Sale</a>
-                                        <a class="dropdown-item" href="?sort={{ sort }}&limit={{ limit }}&featured=featured_on_sale">Featured and On Sale</a>
                                     </div>
                                 </div>
                                 <!-- <div class="btn-group ml-2">
@@ -141,7 +139,7 @@
                             </div>
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
-                                <div class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-list' %}">{{ diecast.manufacturer }}</div>
+                                <a class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     {% if diecast.on_sale %}
                                     <h5>${{ diecast.on_sale_price|intcomma }}</h5>

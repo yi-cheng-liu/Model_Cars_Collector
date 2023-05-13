@@ -123,7 +123,8 @@
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">{{ diecast.vehicle_name }}</a>
+                        <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
+                        <a class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             {% if diecast.on_sale %}
                             <h5>${{ diecast.on_sale_price }}</h5>
@@ -192,7 +193,7 @@
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
-                            <div class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-list' %}">{{ diecast.manufacturer }}</div>
+                        <a class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                             {% if diecast.on_sale %}
                             <h5>${{ diecast.on_sale_price }}</h5>
@@ -226,30 +227,11 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
+                    {% for vehicle_brand in vehicle_brands %}
                     <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-1.jpg' %}" alt="">
+                        <img src="{{ MEDIA_URL }}{{ vehicle_brand.picture }}" alt="{{ MEDIA_URL }}{{ vehicle_brand.picture }}">
                     </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-2.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-3.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-4.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-5.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-6.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-7.jpg' %}" alt="">
-                    </div>
-                    <div class="bg-light p-4">
-                        <img src="{% static 'img/vendor-8.jpg' %}" alt="">
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

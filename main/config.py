@@ -3,9 +3,6 @@
 ## The outlet of the page
 # Topbar
 TOPBAR_1 = 'About'
-TOPBAR_2 = 'Contact'
-TOPBAR_3 = 'Help'
-TOPBAR_4 = 'FAQs'
 
 # Footer
 EMAIL_ADDRESS = 'pagani3321@gmail.com'

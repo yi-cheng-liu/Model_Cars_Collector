@@ -2,15 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem
-from .config import TOPBAR_1, TOPBAR_2, TOPBAR_3, TOPBAR_4, \
+from .config import TOPBAR_1, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
 					FACEBOOK_URL, GOOGLE_MAPS_URL, INSTAGRAM_URL
 
 common_context = {
 	'topbar_1': TOPBAR_1,
-	'topbar_2': TOPBAR_2,
-	'topbar_3': TOPBAR_3,
-	'topbar_4': TOPBAR_4,
 	'email': EMAIL_ADDRESS,
 	'phone': PHONE_NUMBER,
 	'location': LOCATION,
@@ -24,7 +21,8 @@ common_context = {
 def home(request):
 	diecasts = Diecast.objects.all()
 	carousel_items = CarouselItem.objects.all()
-	ctx = {'diecasts': diecasts, 'carousel_items' : carousel_items, **common_context}
+	vehicle_brands = VehicleBrand.objects.all()
+	ctx = {'diecasts': diecasts, 'carousel_items' : carousel_items, 'vehicle_brands' : vehicle_brands, **common_context}
 	return render(request, 'index.html', ctx)
 
 # Manufacturer List Page
@@ -71,18 +69,12 @@ def product_list(request):
 		diecasts = diecasts.order_by('on_sale_price')
 	elif sort == 'price_descending':
 		diecasts = diecasts.order_by('-on_sale_price')
+	elif sort == 'featured':
+		diecasts = diecasts.filter(featured=True)
+	elif sort == 'on_sale':
+		diecasts == diecasts.filter(on_sale=True)
 	else:
 		diecasts = diecasts.order_by('-created_at')
-
-	featured = request.GET.get('featured')
-	if featured == 'featured':
-		diecasts = diecasts.filter(featured=True)
-	elif featured == 'on_sale':
-		diecasts == diecasts.filter(on_sale=True)
-	elif featured == 'featured_on_sale':
-		diecasts = diecasts.filter(featured=True, on_sale=True)
-	else:
-		diecasts = diecasts
 
 	# Limit number of items
 	limit = request.GET.get('limit')
