@@ -48,9 +48,9 @@
             <div class="col-lg-4 col-6 text-left">
                 <form id="search-form" action="{% url 'product-list' %}">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search_query" placeholder="Search for products">
+                        <input type="text" class="form-control border-dark" name="search_query" placeholder="Search for products">
                         <div class="input-group-append">
-                            <button class="input-group-text bg-transparent text-secondary search-icon">
+                            <button class="input-group-text bg-dark border-dark text-secondary search-icon">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
@@ -117,7 +117,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                            <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active {% endif %}">Home</a>
                             <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}active{% endif %}">All Product</a>
                             <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}active{% endif %}">All Manufacturer</a>
                             <!-- <div class="nav-item dropdown">

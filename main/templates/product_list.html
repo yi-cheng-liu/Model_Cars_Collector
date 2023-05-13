@@ -139,7 +139,7 @@
                             </div>
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
-                                <a class="d-flex align-items-center justify-content-center mb-1" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
+                                <a class="d-flex align-items-center justify-content-center text-body mb-1" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     {% if diecast.on_sale %}
                                     <h5>${{ diecast.on_sale_price|intcomma }}</h5>
