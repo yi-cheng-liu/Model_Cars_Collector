@@ -73,13 +73,13 @@
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn d-flex align-items-center justify-content-between bg-secondary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                    <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                    <h5 class="text-dark font-weight-bold m-1"><i class="fa fa-bars mr-2"></i>Categories</h5>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
                         <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manufacturer<i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <a href="#" class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown">Manufacturer<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for manufacturer in manufacturers %}
                                 <a href="{% url 'manufacturer-specific' manufacturer.slug %}" class="dropdown-item">{{ manufacturer.name }}</a>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand<i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <a href="#" class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown">Brand<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for vehicle_brand in vehicle_brands %}
                                 <a href="{% url 'vehicle-brand-specific' vehicle_brand.slug %}" class="dropdown-item">{{ vehicle_brand.name }}</a>
@@ -95,14 +95,14 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Scale<i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <a href="#" class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown">Scale<i class="fa fa-angle-right float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for scale in scales %}
                                 <a href="{% url 'scale-specific' scale.slug %}" class="dropdown-item">{{ scale.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">Accessories</a>
+                        <a href="" class="nav-item nav-link font-weight-bold">Accessories</a>
                     </div>
                 </nav>
             </div>
@@ -117,18 +117,18 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active {% endif %}">Home</a>
-                            <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}active{% endif %}">All Product</a>
-                            <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}active{% endif %}">All Manufacturer</a>
+                            <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %} font-weight-bold active {% endif %}">Home</a>
+                            <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}font-weight-bold active{% endif %}">All Product</a>
+                            <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}font-weight-bold active{% endif %}">All Manufacturer</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}active{% endif %}" data-toggle="dropdown">Profile <i class="fa fa-angle-down mt-1"></i></a>
+                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}font-weight-bold active{% endif %}" data-toggle="dropdown">Profile <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-secondary rounded-0 border-0 m-0">
-                                    <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}active{% endif %}">Shopping Cart</a>
-                                    <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/cart/checkout/' %}active{% endif %}">Checkout</a>
+                                    <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}font-weight-bold active{% endif %}">Shopping Cart</a>
+                                    <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/cart/checkout/' %}font-weight-bold active{% endif %}">Checkout</a>
                                 </div>
                             </div>
-                            <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
-                            <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}active{% endif %}">About us</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}font-weight-bold active{% endif %}">Contact</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}font-weight-bold active{% endif %}">About us</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">

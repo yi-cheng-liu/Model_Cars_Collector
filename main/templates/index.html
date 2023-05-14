@@ -35,7 +35,9 @@
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ MEDIA_URL }}{{ diecast.picture1 }}">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
+                        {% if diecast.on_sale_price and diecast.save_percent %}
+                            <h6 class="text-white text-uppercase">Save {{ diecast.save_percent }}%</h6>
+                        {% endif %}
                         <h3 class="text-white mb-3">Special Offer</h3>
                         <a href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}" class="btn btn-secondary">Shop Now</a>
                     </div>
@@ -90,10 +92,10 @@
                 <a class="text-decoration-none" href="">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="{{ MEDIA_URL }}{{ manufacturer.picture }}" alt="">
+                            <img class="img-fluid" src="{{ MEDIA_URL }}{{ manufacturer.picture }}" alt="{{ MEDIA_URL }}{{ manufacturer.picture }}">
                         </div>
                         <div class="flex-fill pl-3">
-                            <h6>{{ manufacturer.name }}</h6>
+                            <a class="h5 text-decoration-none text-truncate" href="{% url 'manufacturer-specific' manufacturer.slug %}">{{ manufacturer.name }}</a>
                             <small class="text-body">100 Products</small>
                         </div>
                     </div>
@@ -162,7 +164,9 @@
                 <div class="product-offer mb-30" style="height: 300px;">
                     <img class="img-fluid" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ MEDIA_URL }}{{ diecast.picture1 }}">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
+                        {% if diecast.on_sale_price and diecast.save_percent %}
+                            <h6 class="text-white text-uppercase">Save {{ diecast.save_percent }}%</h6>
+                        {% endif %}
                         <h3 class="text-white mb-3">Special Offer</h3>
                         <a href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}" class="btn btn-secondary">Shop Now</a>
                     </div>

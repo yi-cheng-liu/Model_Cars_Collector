@@ -42,14 +42,14 @@ def manufacturer_specific(request, manufacturer):
 def vehicle_brand_specific(request, vehicle_brand):
 	vehicle_brand_obj = get_object_or_404(VehicleBrand, slug=vehicle_brand)
 	diecasts = Diecast.objects.filter(vehicle_brand=vehicle_brand_obj)
-	ctx = {'diecasts': diecasts, 'vehicle_brand_obj': vehicle_brand_obj, **common_context}
+	ctx = {'diecasts': diecasts, 'vehicle_brand': vehicle_brand_obj, **common_context}
 	return render(request,'product_list.html', ctx)
 
 # Scale Specific Page
 def scale_specific(request, scale):
 	scale_obj = get_object_or_404(Scale, slug=scale)
 	diecasts = Diecast.objects.filter(scale=scale_obj)
-	ctx = {'diecasts': diecasts, 'scale_obj': scale_obj, **common_context}
+	ctx = {'diecasts': diecasts, 'scale': scale_obj, **common_context}
 	return render(request,'product_list.html', ctx)
 
 # Product List Page
@@ -123,12 +123,10 @@ def checkout(request):
 
 # Contact Page
 def contact(request):
-	diecasts = Diecast.objects.all()	
-	ctx = {'diecasts': diecasts, **common_context}
+	ctx = {**common_context}
 	return render(request, 'contact.html', ctx)
 
 # About us Page
 def about(request):
-	vehicle_brands = VehicleBrand.objects.all()
-	ctx = {'vehicle_brands': vehicle_brands, **common_context}
+	ctx = {**common_context}
 	return render(request, 'about.html', ctx)

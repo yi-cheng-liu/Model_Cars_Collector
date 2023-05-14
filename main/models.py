@@ -2,11 +2,11 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.conf import settings
-from django.utils.text import slugify
-
-from datetime import datetime, timedelta
 from django.utils import timezone
+from django.utils.text import slugify
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
+from decimal import Decimal
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -79,9 +79,10 @@ class Diecast(models.Model):
     scale = models.ForeignKey(Scale, on_delete=models.CASCADE)
     buying_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     retail_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
-    on_sale = models.BooleanField(default=False)
-    on_sale_home = models.BooleanField(default=False)
+    on_sale = models.BooleanField(default=False, help_text="ON SALE: 2, 4, 6, 8 items")
+    on_sale_home = models.BooleanField(default=False, help_text="ON SALE on home page: Max 2 items")
     on_sale_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank = True, help_text="ON SALE: on sale price < retail price")
+    save_percent = models.IntegerField(null=True, blank=True, validators=[MaxValueValidator(99)])
     production_year = models.IntegerField(default=datetime.now().year,
             validators=[MinValueValidator(1800), MaxValueValidator(datetime.now().year)])    
     color = models.CharField(max_length=15)
@@ -120,9 +121,21 @@ class Diecast(models.Model):
         three_months_ago = timezone.now() - timezone.timedelta(days=90)
         return self.created_at >= three_months_ago
     
+    def calculate_save_percent(self):
+        if self.on_sale_price and self.retail_price and not self.save_percent:
+            difference = self.retail_price - self.on_sale_price
+            self.save_percent = (difference / self.retail_price) * 100
+
+    def calculate_on_sale_price(self):
+        if self.save_percent and self.retail_price and not self.on_sale_price:
+            discount_amount = Decimal(self.save_percent / 100) * self.retail_price
+            self.on_sale_price = self.retail_price - discount_amount
+    
     def clean(self):
         super().clean()
         self.is_valid_on_sale_price()
+        self.calculate_save_percent()
+        self.calculate_on_sale_price()
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -131,6 +144,9 @@ class Diecast(models.Model):
         # Force on_sale_price to be the same as retail_price when on_sale is False
         if not self.on_sale:
             self.on_sale_price = self.retail_price
+
+        self.calculate_save_percent()
+        self.calculate_on_sale_price()
         super().save(*args, **kwargs)
 
 class CarouselItem(models.Model):
