@@ -6,6 +6,15 @@ from django.utils.text import slugify
 
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.contrib.auth.models import User
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.user.username
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=30,
@@ -85,6 +94,7 @@ class Diecast(models.Model):
     sold = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    profiles = models.ManyToManyField(Profile, blank=True)
     
     # Picture
     picture1 = models.ImageField(upload_to='pictures/', null=True)

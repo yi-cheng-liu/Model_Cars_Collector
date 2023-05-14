@@ -120,13 +120,13 @@
                             <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %}active {% endif %}">Home</a>
                             <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}active{% endif %}">All Product</a>
                             <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}active{% endif %}">All Manufacturer</a>
-                            <!-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}active{% endif %}" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}active{% endif %}" data-toggle="dropdown">Profile <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-secondary rounded-0 border-0 m-0">
                                     <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}active{% endif %}">Shopping Cart</a>
                                     <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/cart/checkout/' %}active{% endif %}">Checkout</a>
                                 </div>
-                            </div> -->
+                            </div>
                             <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
                             <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}active{% endif %}">About us</a>
                         </div>
@@ -204,8 +204,8 @@
         <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-secondary" href="#">Model Car Collector</a>. All Rights Reserved. Designed by
-                    <a class="text-secondary" href="https://htmlcodex.com">HTML Codex</a>
+                    &copy; <a class="text-secondary" href="#">Model Car Collector</a>. All Rights Reserved. 
+                    <!-- <a class="text-secondary" href="https://htmlcodex.com">HTML Codex</a> -->
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
