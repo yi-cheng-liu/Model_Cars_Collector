@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem
 from .config import TOPBAR_1, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
-					FACEBOOK_URL, GOOGLE_MAPS_URL, INSTAGRAM_URL
+					FACEBOOK_URL, INSTAGRAM_URL, SHOPEE_URL, GOOGLE_MAPS_URL
 
 common_context = {
 	'topbar_1': TOPBAR_1,
@@ -12,8 +12,9 @@ common_context = {
 	'phone': PHONE_NUMBER,
 	'location': LOCATION,
 	'facebook': FACEBOOK_URL,
-	'google_maps': GOOGLE_MAPS_URL,
 	'instagram': INSTAGRAM_URL,
+	'shopee': SHOPEE_URL,
+	'google_maps': GOOGLE_MAPS_URL,
 }
 
 
