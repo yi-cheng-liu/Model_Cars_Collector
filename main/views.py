@@ -72,7 +72,7 @@ def product_list(request):
 	elif sort == 'featured':
 		diecasts = diecasts.filter(featured=True)
 	elif sort == 'on_sale':
-		diecasts == diecasts.filter(on_sale=True)
+		diecasts = diecasts.filter(on_sale=True)
 	else:
 		diecasts = diecasts.order_by('-created_at')
 
