@@ -2,13 +2,13 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Manufacturer, VehicleBrand, Scale, Diecast, CarouselItem
+from .models import Manufacturer, VehicleBrand, Scale, Diecast, CarouselItem, AboutUs
 
+# Diecast
 class DiecastAdminForm(forms.ModelForm):
     class Meta:
         model = Diecast
         fields = '__all__'
-        
 @admin.register(Diecast)
 class DiecastAdmin(admin.ModelAdmin):
     list_display = ('vehicle_name', 'manufacturer', 'vehicle_brand', 'scale', 'retail_price', 'on_sale_price', 'inventory', 'sold', 'featured', 'on_sale', 'picture_preview')
@@ -45,6 +45,7 @@ class DiecastAdmin(admin.ModelAdmin):
             obj.picture8 = request.FILES['picture8']
         obj.save()
 
+# Manufacturer
 class ManufacturerAdminForm(forms.ModelForm):
     picture = forms.ImageField(required=False)
     class Meta:
@@ -64,6 +65,7 @@ class ManufacturerAdmin(admin.ModelAdmin):
     picture_preview.short_description = 'Logo'
     picture_preview.allow_tags = True
 
+# VehicleBrand
 class VehicleBrandAdminForm(forms.ModelForm):
     picture = forms.ImageField(required=False)
     class Meta:
@@ -83,10 +85,12 @@ class VehicleBrandAdmin(admin.ModelAdmin):
     picture_preview.short_description = 'Logo'
     picture_preview.allow_tags = True
 
+# Scale
 @admin.register(Scale)
 class ScaleAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
+# CarouselItem
 class CarouselItemAdminForm(forms.ModelForm):
     picture = forms.ImageField(required=False)
     class Meta:
@@ -104,4 +108,23 @@ class CarouselItemAdmin(admin.ModelAdmin):
         return None
 
     picture_preview.short_description = 'Carousel Picture'
+    picture_preview.allow_tags = True
+
+# AboutUs
+class AboutUsAdminForm(forms.ModelForm):
+    picture = forms.ImageField(required=False)
+    class Meta:
+        model = AboutUs
+        fields = '__all__'
+@admin.register(AboutUs)
+class AboutUsAdmin(admin.ModelAdmin):
+    form = AboutUsAdminForm
+    list_display = ('name', 'picture_preview')
+
+    def picture_preview(self, obj):
+        if obj.picture:
+            return format_html('<img src="{}" height="100"/>', obj.picture.url)
+        return None
+
+    picture_preview.short_description = 'photo_preview'
     picture_preview.allow_tags = True

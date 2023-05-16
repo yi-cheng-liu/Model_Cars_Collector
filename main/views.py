@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
-from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem
+from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem, AboutUs
 from .config import TOPBAR_1, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
 					FACEBOOK_URL, INSTAGRAM_URL, SHOPEE_URL, GOOGLE_MAPS_URL
@@ -129,5 +129,6 @@ def contact(request):
 
 # About us Page
 def about(request):
-	ctx = {**common_context}
+	about_us = AboutUs.objects.all()
+	ctx = {'about_us': about_us, **common_context}
 	return render(request, 'about.html', ctx)

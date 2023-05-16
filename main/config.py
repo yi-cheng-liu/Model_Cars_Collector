@@ -13,4 +13,3 @@ FACEBOOK_URL = 'https://www.facebook.com/pagani3312/'
 INSTAGRAM_URL = 'https://instagram.com/hungryqqqqq?igshid=NTc4MTIwNjQ2YQ=='
 SHOPEE_URL = 'https://shopee.tw/pagani3312'
 GOOGLE_MAPS_URL = 'https://goo.gl/maps/RWAq3X5bPU5kKgrP7'
-

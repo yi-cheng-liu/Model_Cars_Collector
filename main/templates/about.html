@@ -16,11 +16,23 @@
     <!-- Breadcrumb End -->
 
 
-    <!-- Contact Start -->
+    <!-- About Start -->
     <div class="container-fluid">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">About us</span></h2>
+        <div class="row px-xl-5">
+            {% for about in about_us %}
+            <div class="col-lg-6 mb-5">
+                <p style="font-size: 22px">{{ about.text1 }}</p>
+                <p style="font-size: 18px">{{ about.text2 }}</p>
+                <p style="font-size: 18px">{{ about.text3 }}</p>
+            </div>
+            <div class="col-lg-6 mb-5">
+                <img class="w-100 h-100" src="{{ MEDIA_URL }}{{ about.picture }}" alt="{{ about.picture }}">
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    <!-- Contact End -->
+    <!-- About End -->
 
     {% endblock %}
 
