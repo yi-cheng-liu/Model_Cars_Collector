@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem, AboutUs
 from .config import TOPBAR_1, \
@@ -59,6 +59,8 @@ def product_list(request):
 	manufacturers = Manufacturer.objects.all()
 	vehicle_brands = VehicleBrand.objects.all()
 	scales = Scale.objects.all()
+    
+	total_diecasts = Diecast.objects.count()
 
 	# Sort products
 	sort = request.GET.get('sort')
@@ -82,26 +84,37 @@ def product_list(request):
 	if limit:
 		diecasts = diecasts[:int(limit)]
 	else:
-		limit = 20
+		limit = 5
 
 	# Apply search query filter if it exists
 	search_query = request.GET.get('search_query')
 	if search_query:
 		diecasts = diecasts.filter(title__icontains=search_query)
 
-	# Pagination
-	page_number = request.GET.get('page')
-	paginator = Paginator(diecasts, limit)
-	diecasts = paginator.get_page(page_number)
+	# Get page number from the GET request
+	page = request.GET.get('page')
+
+    # Create a Paginator object
+	paginator = Paginator(diecasts, limit)  # Show 'limit' diecasts per page
+
+	try:
+		diecasts = paginator.page(page)
+	except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+		diecasts = paginator.page(1)
+	except EmptyPage:
+        # If page is out of range (e.g., 9999), deliver last page of results.
+		diecasts = paginator.page(paginator.num_pages)
 
 	ctx = {
         'diecasts': diecasts,
         'manufacturers': manufacturers,
 		'vehicle_brands' : vehicle_brands,
         'scales': scales,
+        'total_diecasts' : total_diecasts,
 		'sort': sort,
         'limit': limit,
-		'page_number': page_number,
+		'page': page,
         **common_context
     }
 	return render(request,'product_list.html', ctx)
