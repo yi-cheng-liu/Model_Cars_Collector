@@ -10,7 +10,7 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="{% url 'home' %}">Home</a>
-                    <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">All Product</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'products' %}">All Product</a>
                     <a class="breadcrumb-item text-dark" href="{% url 'manufacturer-specific' diecast.manufacturer.slug %}">{{ diecast.manufacturer }}</a>
                     <span class="breadcrumb-item active">{{ diecast.vehicle_name }}</span>
                 </nav>

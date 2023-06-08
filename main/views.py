@@ -37,24 +37,24 @@ def manufacturer_specific(request, manufacturer):
 	manufacturer_obj = get_object_or_404(Manufacturer, slug=manufacturer)
 	diecasts = Diecast.objects.filter(manufacturer=manufacturer_obj)
 	ctx = {'diecasts': diecasts, 'manufacturer': manufacturer_obj, **common_context}
-	return render(request,'product_list.html', ctx)
+	return render(request,'products.html', ctx)
 
 # Vehicle Brand Specific Page
 def vehicle_brand_specific(request, vehicle_brand):
 	vehicle_brand_obj = get_object_or_404(VehicleBrand, slug=vehicle_brand)
 	diecasts = Diecast.objects.filter(vehicle_brand=vehicle_brand_obj)
 	ctx = {'diecasts': diecasts, 'vehicle_brand': vehicle_brand_obj, **common_context}
-	return render(request,'product_list.html', ctx)
+	return render(request,'products.html', ctx)
 
 # Scale Specific Page
 def scale_specific(request, scale):
 	scale_obj = get_object_or_404(Scale, slug=scale)
 	diecasts = Diecast.objects.filter(scale=scale_obj)
 	ctx = {'diecasts': diecasts, 'scale': scale_obj, **common_context}
-	return render(request,'product_list.html', ctx)
+	return render(request,'products.html', ctx)
 
 # Product List Page
-def product_list(request):
+def products(request):
 	diecasts = Diecast.objects.all()
 	manufacturers = Manufacturer.objects.all()
 	vehicle_brands = VehicleBrand.objects.all()
@@ -117,7 +117,7 @@ def product_list(request):
 		'page': page,
         **common_context
     }
-	return render(request,'product_list.html', ctx)
+	return render(request,'products.html', ctx)
 
 # Detail Page
 def detail(request, manufacturer, slug):

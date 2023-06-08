@@ -10,14 +10,14 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-10">
                     <a class="breadcrumb-item text-dark" href="{% url 'home' %}">Home</a>
-                    {% if request.path == '/product-list/' %}
+                    {% if request.path == '/products/' %}
                         <span class="breadcrumb-item active">All Product</a>
                     {% else %}
-                        <a class="breadcrumb-item text-dark" href="{% url 'product-list' %}">All Product</a>
+                        <a class="breadcrumb-item text-dark" href="{% url 'products' %}">All Product</a>
                     {% endif %}
 
                     {% for manufacturer in manufacturers %}
-                        {% if request.path == '/product-list/'|add:manufacturer.slug|add:'/' %}
+                        {% if request.path == '/products/'|add:manufacturer.slug|add:'/' %}
                             <span class="breadcrumb-item active">{{ manufacturer.name }}</span>
                         {% endif %}
                     {% endfor %}

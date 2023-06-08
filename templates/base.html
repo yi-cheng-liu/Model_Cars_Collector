@@ -24,12 +24,11 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="{% url 'home' %}" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-secondary bg-dark px-2">Model Car</span>
-                    <span class="h1 text-uppercase text-dark bg-secondary px-2 ml-n1">Collector</span>
+                    <img src="{% static 'img/logo-black.png' %}" alt="Logo" style="height: 100px;">
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form id="search-form" action="{% url 'product-list' %}">
+                <form id="search-form" action="{% url 'products' %}">
                     <div class="input-group">
                         <input type="text" class="form-control border-dark" name="search_query" placeholder="Search for products">
                         <div class="input-group-append">
@@ -92,8 +91,7 @@
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-light bg-dark px-2">Motor Car</span>
-                        <span class="h1 text-uppercase text-dark bg-light px-2 ml-n1">Collector</span>
+                        <img src="{% static 'img/logo-white-removebg.png' %}" alt="Logo" style="height: 80px;">
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -101,7 +99,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %} font-weight-bold active {% endif %}">Home</a>
-                            <a href="{% url 'product-list' %}" class="nav-item nav-link {% if request.path == '/product-list/' %}font-weight-bold active{% endif %}">All Product</a>
+                            <a href="{% url 'products' %}" class="nav-item nav-link {% if request.path == '/products/' %}font-weight-bold active{% endif %}">All Product</a>
                             <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}font-weight-bold active{% endif %}">All Manufacturer</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}font-weight-bold active{% endif %}" data-toggle="dropdown">Profile <i class="fa fa-angle-down mt-1"></i></a>
