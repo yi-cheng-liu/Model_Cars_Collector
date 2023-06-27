@@ -7,24 +7,24 @@
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">{{ topbar_1 }}</a>
+                    <a class="text-body mr-3" href="{% url 'delivery-and-returns' %}">{{ topbar_1 }}</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <div class="btn-group">
+                    <!-- <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button">中文</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="{% url 'home' %}" class="text-decoration-none">
-                    <img src="{% static 'img/logo-black.png' %}" alt="Logo" style="height: 100px;">
+                    <img src="{% static 'img/logo-black.png' %}" alt="Logo" style="height: 75px;">
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -101,25 +101,29 @@
                             <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/' %} font-weight-bold active {% endif %}">Home</a>
                             <a href="{% url 'products' %}" class="nav-item nav-link {% if request.path == '/products/' %}font-weight-bold active{% endif %}">All Product</a>
                             <a href="{% url 'manufacturer-list' %}" class="nav-item nav-link {% if request.path == '/manufacturer-list/' %}font-weight-bold active{% endif %}">All Manufacturer</a>
-                            <div class="nav-item dropdown">
+                            <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle {% if request.path == '/cart/' or request.path == '/cart/checkout/' %}font-weight-bold active{% endif %}" data-toggle="dropdown">Profile <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-secondary rounded-0 border-0 m-0">
                                     <a href="{% url 'cart' %}" class="dropdown-item {% if request.path == '/cart/' %}font-weight-bold active{% endif %}">Shopping Cart</a>
                                     <a href="{% url 'checkout' %}" class="dropdown-item {% if request.path == '/cart/checkout/' %}font-weight-bold active{% endif %}">Checkout</a>
                                 </div>
-                            </div>
-                            <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}font-weight-bold active{% endif %}">Contact</a>
-                            <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}font-weight-bold active{% endif %}">About us</a>
+                            </div> -->
+                            <!-- <a href="{% url 'contact' %}" class="nav-item nav-link {% if request.path == '/contact/' %}font-weight-bold active{% endif %}">Contact</a> -->
+                            <a href="{% url 'about' %}" class="nav-item nav-link {% if request.path == '/about/' %}font-weight-bold active{% endif %}">About Us</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
+                            <!-- <a href="" class="btn px-0">
                                 <a class="fas fa-user fa-2x text-secondary" data-toggle="dropdown"></a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <button class="dropdown-item" type="button">Sign in</button>
-                                        <button class="dropdown-item" type="button">Sign up</button>
+                                        <button class="dropdown-item" type="button">
+                                            <a href="{% url 'login' %}" class="btn-secondary">Login</a>
+                                        </button>
+                                        <button class="dropdown-item" type="button">
+                                            <a href="{% url 'register' %}" class="btn-secondary">Register</a>
+                                        </button>
                                     </div>
-                                <!-- <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span> -->
-                            </a>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                            </a> -->
                         </div>
                     </div>
                 </nav>
@@ -149,25 +153,26 @@
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-4 mb-5">
-                        <!-- <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                        <h5 class="text-secondary text-uppercase mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> Opening Hours</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div> -->
+                            <div class="text-secondary mb-2">Monday Closed</div>
+                            <div class="text-secondary mb-2">Tuesday 1:30 PM - 9:30 PM</div>
+                            <div class="text-secondary mb-2">Wednesday 1:30 PM - 9:30 PM</div>
+                            <div class="text-secondary mb-2">Thursday 1:30 PM - 9:30 PM</div>
+                            <div class="text-secondary mb-2">Friday 1:30 PM - 9:30 PM</div>
+                            <div class="text-secondary mb-2">Saturday 1:30 PM - 9:30 PM</div>
+                            <div class="text-secondary">Sunday 1:30 PM - 9:30 PM</div>
+                        </div>
                     </div>
                     <div class="col-md-4 mb-5">
                     </div>
                     <div class="col-md-4 mb-5">
                         <h4 class="text-secondary text-uppercase mb-4">Follow Us</h4>
                         <div class="d-flex">
-                            <a class="btn btn-secondary btn-square mr-2" href="{{ facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-secondary btn-square mr-2" href="{{ instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-secondary btn-square mr-2" href="{{ shopee }}" target="_blank"><i class="fas fa-shopping-bag	"></i></a>
-                            <a class="btn btn-secondary btn-square mr-2" href="{{ google_maps }}" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                            <a class="btn btn-secondary btn-lg-square mr-2" href="{{ facebook }}" target="_blank"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a class="btn btn-secondary btn-lg-square mr-2" href="{{ instagram }}" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a class="btn btn-secondary btn-lg-square mr-2" href="{{ shopee }}" target="_blank"><i class="fas fa-shopping-bag fa-lg"></i></a>
+                            <a class="btn btn-secondary btn-lg-square mr-2" href="{{ google_maps }}" target="_blank"><i class="fas fa-map-marker-alt fa-lg"></i></a>
                         </div>
                     </div>
                 </div>
@@ -180,9 +185,9 @@
                     <!-- <a class="text-secondary" href="https://htmlcodex.com">HTML Codex</a> -->
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <!-- <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">
-            </div>
+            </div> -->
         </div>
     </div>
     {% endblock %}

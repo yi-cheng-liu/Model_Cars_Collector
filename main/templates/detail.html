@@ -72,8 +72,8 @@
 
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
-                    <h3>{{ diecast.title }}</h3>
-                    <div class="d-flex mb-3">
+                    <h2>{{ diecast.title }}</h2>
+                    <!-- <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
                             <small class="fas fa-star"></small>
                             <small class="fas fa-star"></small>
@@ -82,12 +82,12 @@
                             <small class="far fa-star"></small>
                         </div>
                         <small class="pt-1">(99 Reviews)</small>
-                    </div>
+                    </div> -->
                     {% if diecast.on_sale %}
-                        <h3 class="font-weight-semi-bold">${{ diecast.on_sale_price|intcomma }}</h3>
-                        <h4 class="font-weight-semi-bold mb-4"><del>${{ diecast.retail_price|intcomma }}</del></h4>
+                        <h4 class="font-weight-bold">${{ diecast.on_sale_price|intcomma }}</h4>
+                        <h5 class="font-weight-bold mb-4"><del>${{ diecast.retail_price|intcomma }}</del></h5>
                     {% else %}
-                        <h3 class="font-weight-semi-bold mb-4">${{ diecast.on_sale_price|intcomma }}</h3>
+                        <h4 class="font-weight-bold mb-4">${{ diecast.on_sale_price|intcomma }}</h4>
                     {% endif %}
                     <p class="mb-4">{{ diecast.text }}</p>
                     <div class="d-flex mb-3">
@@ -125,7 +125,7 @@
                             </div>
                         </form>
                     </div> -->
-                    <div class="d-flex align-items-center mb-4 pt-2">
+                    <!-- <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-secondary btn-minus">
@@ -140,8 +140,8 @@
                             </div>
                         </div>
                         <button class="btn btn-secondary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-                    </div>
-                    <div class="d-flex pt-2">
+                    </div> -->
+                    <!-- <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
                             <a class="text-dark px-2" href="">
@@ -154,7 +154,7 @@
                                 <i class="fab fa-pinterest"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
                         <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Product Description</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Review</a>
+                        <!-- <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Review</a> -->
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
@@ -267,7 +267,7 @@
 
 
     <!-- Products Start -->
-    <div class="container-fluid py-5">
+    <!-- <div class="container-fluid py-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
         <div class="row px-xl-5">
             <div class="col">
@@ -285,120 +285,12 @@
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture2 }}">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small class="fa fa-star text-secondary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Products End -->
 
     {% endblock %}

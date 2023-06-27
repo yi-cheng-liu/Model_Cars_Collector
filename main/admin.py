@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Manufacturer, VehicleBrand, Scale, Diecast, CarouselItem, AboutUs
+from .models import Manufacturer, VehicleBrand, Scale, Diecast, CarouselItem, AboutUs, DeliveryAndReturns
 
 # Diecast
 class DiecastAdminForm(forms.ModelForm):
@@ -119,6 +119,25 @@ class AboutUsAdminForm(forms.ModelForm):
 @admin.register(AboutUs)
 class AboutUsAdmin(admin.ModelAdmin):
     form = AboutUsAdminForm
+    list_display = ('name', 'picture_preview')
+
+    def picture_preview(self, obj):
+        if obj.picture:
+            return format_html('<img src="{}" height="100"/>', obj.picture.url)
+        return None
+
+    picture_preview.short_description = 'photo_preview'
+    picture_preview.allow_tags = True
+
+# DeliveryAndReturns
+class DeliveryAndReturnsAdminForm(forms.ModelForm):
+    picture = forms.ImageField(required=False)
+    class Meta:
+        model = DeliveryAndReturns
+        fields = '__all__'
+@admin.register(DeliveryAndReturns)
+class DeliveryAndReturnsAdmin(admin.ModelAdmin):
+    form = DeliveryAndReturnsAdminForm
     list_display = ('name', 'picture_preview')
 
     def picture_preview(self, obj):

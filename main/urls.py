@@ -12,10 +12,15 @@ urlpatterns = [
     path('products/vehicle-brand/<slug:vehicle_brand>/', views.vehicle_brand_specific, name='vehicle-brand-specific'),
     path('products/scale/<slug:scale>/', views.scale_specific, name='scale-specific'),
     path('products/manufacturer/<slug:manufacturer>/<slug:slug>/', views.detail, name='detail'), 
+    path('delivery-and-returns/', views.delivery_and_returns, name='delivery-and-returns'),
+
     path('cart/', views.cart, name='cart'),
     path('cart/checkout/', views.checkout, name='checkout'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
+
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

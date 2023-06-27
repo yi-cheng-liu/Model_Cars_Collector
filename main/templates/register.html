@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+    {% block content %}
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+            <span class="bg-secondary pr-3">Register Page</span>
+        </h2>
+        <div class="row px-xl-5">
+            <div class="col-lg-6 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_f }}
+                        <div class="control-group">
+                            <input type="submit" class="form-control border-secondary" id="name" placeholder="Your Name" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+    
+    {% endblock %}

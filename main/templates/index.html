@@ -96,7 +96,6 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <a class="h5 text-decoration-none text-truncate" href="{% url 'manufacturer-specific' manufacturer.slug %}">{{ manufacturer.name }}</a>
-                            <small class="text-body">100 Products</small>
                         </div>
                     </div>
                 </a>
@@ -117,12 +116,9 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}"><i class="fas fa-car"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                        </div>
+                        <a href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">
+                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
+                        </a>
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
@@ -188,12 +184,9 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}"><i class="fas fa-car"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                        </div>
+                        <a href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">
+                            <img class="img-fluid w-100" src="{{ MEDIA_URL }}{{ diecast.picture1 }}" alt="{{ diecast.picture1 }}">
+                        </a>
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="{% url 'detail' diecast.manufacturer.slug diecast.slug %}">{{ diecast.vehicle_name }}</a>
@@ -233,7 +226,9 @@
                 <div class="owl-carousel vendor-carousel">
                     {% for vehicle_brand in vehicle_brands %}
                     <div class="bg-light p-4">
-                        <img src="{{ MEDIA_URL }}{{ vehicle_brand.picture }}" alt="{{ MEDIA_URL }}{{ vehicle_brand.picture }}">
+                        <a href="{% url 'vehicle-brand-specific' vehicle_brand.slug %}">
+                            <img src="{{ MEDIA_URL }}{{ vehicle_brand.picture }}" alt="{{ MEDIA_URL }}{{ vehicle_brand.picture }}">
+                        </a>
                     </div>
                     {% endfor %}
                 </div>

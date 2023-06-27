@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.forms import UserCreationForm
 
-from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem, AboutUs
+from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem, AboutUs, DeliveryAndReturns
 from .config import TOPBAR_1, \
 					EMAIL_ADDRESS, PHONE_NUMBER, LOCATION, \
 					FACEBOOK_URL, INSTAGRAM_URL, SHOPEE_URL, GOOGLE_MAPS_URL
@@ -84,7 +85,7 @@ def products(request):
 	if limit:
 		diecasts = diecasts[:int(limit)]
 	else:
-		limit = 5
+		limit = 500
 
 	# Apply search query filter if it exists
 	search_query = request.GET.get('search_query')
@@ -145,3 +146,27 @@ def about(request):
 	about_us = AboutUs.objects.all()
 	ctx = {'about_us': about_us, **common_context}
 	return render(request, 'about.html', ctx)
+
+# Delivery and Returns Page
+def delivery_and_returns(request):
+	delivery_and_returns = DeliveryAndReturns.objects.all()
+	ctx = {'delivery_and_returns': delivery_and_returns, **common_context}
+	return render(request, 'delivery_and_returns.html', ctx)
+
+# Login Page
+def login(request):
+
+	ctx = {**common_context}
+	return render(request, 'login.html', ctx)
+
+# Register Page
+def register(request):
+	form = UserCreationForm()
+
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+
+	ctx = {**common_context}
+	return render(request, 'register.html', ctx)

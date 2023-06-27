@@ -168,3 +168,15 @@ class AboutUs(models.Model):
 
     def __str__(self):
         return self.name
+    
+class DeliveryAndReturns(models.Model):
+    name = models.CharField(max_length=30, default='Delivery and returns')
+    text1 = models.TextField(null=True, blank=True)
+    text2 = models.TextField(null=True, blank=True)
+    text3 = models.TextField(null=True, blank=True)
+
+    # Picture
+    picture = models.ImageField(upload_to='manufacturer/', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
