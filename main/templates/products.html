@@ -11,9 +11,10 @@
                 <nav class="breadcrumb bg-light mb-10">
                     <a class="breadcrumb-item text-dark" href="{% url 'home' %}">Home</a>
                     {% if request.path == '/products/' %}
-                        <span class="breadcrumb-item active">All Product</a>
+                        <span class="breadcrumb-item active">All Product</span>
                     {% else %}
                         <a class="breadcrumb-item text-dark" href="{% url 'products' %}">All Product</a>
+                        <span class="breadcrumb-item text-dark" href="{% url 'products' %}">{{ manufacturer.name }}</span>
                     {% endif %}
 
                     {% for manufacturer in manufacturers %}

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&*n=j7x6ncy=ns$m%0!&!ki7$x^!wb^@qdo3q9uthuzww8%x3&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', '54.227.246.216', '.vercel.app']
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Apps
     'main.apps.MainConfig',
     'django_extensions',
+    # "payments",
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = "model_car_collector.wsgi.app"
 
@@ -142,3 +144,17 @@ MEDIA_URL = '/main/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+PAYMENT_HOST = 'localhost:8000'
+# PAYMENT_USES_SSL = False
+# PAYMENT_MODEL = 'modelcarcollector.models.Payment'
+# PAYMENT_VARIANT_FACTORY = "model_car_collector.provider_factory"
+
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

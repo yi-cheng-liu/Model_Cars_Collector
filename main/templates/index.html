@@ -95,7 +95,9 @@
                             <img class="img-fluid" src="{{ MEDIA_URL }}{{ manufacturer.picture }}" alt="{{ MEDIA_URL }}{{ manufacturer.picture }}">
                         </div>
                         <div class="flex-fill pl-3">
-                            <a class="h5 text-decoration-none text-truncate" href="{% url 'manufacturer-specific' manufacturer.slug %}">{{ manufacturer.name }}</a>
+                            <a class="text-decoration-none text-truncate" href="{% url 'manufacturer-specific' manufacturer.slug %}">
+                                <h5>{{ manufacturer.name }}</h5>
+                            </a>
                         </div>
                     </div>
                 </a>

@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.forms import UserCreationForm
+
+from django.template.response import TemplateResponse
+from payments import get_payment_model, RedirectNeeded
 
 from .models import Diecast, Manufacturer, VehicleBrand, Scale, CarouselItem, AboutUs, DeliveryAndReturns
 from .config import TOPBAR_1, \
@@ -132,9 +135,19 @@ def cart(request):
 	return render(request, 'cart.html', ctx)
 
 # Checkout Page
-def checkout(request):
-	ctx = {**common_context}
-	return render(request, 'checkout.html', ctx)
+def checkout(request, payment_id):
+    payment = get_object_or_404(get_payment_model(), id=payment_id)
+
+    try:
+        form = payment.get_form(data=request.POST or None)
+    except RedirectNeeded as redirect_to:
+        return redirect(str(redirect_to))
+
+    return TemplateResponse(
+        request,
+        'payment.html',
+        {'form': form, 'payment': payment, **common_context}
+    )
 
 # Contact Page
 def contact(request):

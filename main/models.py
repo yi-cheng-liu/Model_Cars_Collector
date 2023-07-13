@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from decimal import Decimal
 
+from payments import PurchasedItem
+from payments.models import BasePayment
+from pyparsing import Iterable
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
@@ -180,3 +184,4 @@ class DeliveryAndReturns(models.Model):
 
     def __str__(self):
         return self.name
+    
