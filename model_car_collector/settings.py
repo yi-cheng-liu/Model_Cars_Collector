@@ -79,7 +79,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+WSGI_APPLICATION = 'model_car_collector.wsgi.app'
 
 
 # Database
