@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-&*n=j7x6ncy=ns$m%0!&!ki7$x^!wb^@qdo3q9uthuzww8%x3&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0', '54.227.246.216', '.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0', '54.227.246.216', '.vercel.app', '.now.sh']
+
 
 
 # Application definition
@@ -86,9 +87,18 @@ WSGI_APPLICATION = 'model_car_collector.wsgi.app'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
+    'default': {
+        'ENGINE': "django.db.backends.postgresql_psycopg2",
+        'HOST': "db.osuajangmubzkajpswzh.supabase.co",
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "JerryLiu#880524",
+        'PORT': "5432",
+
     }
 }
 
@@ -130,10 +140,12 @@ USE_TZ = True
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main')
+    os.path.join(BASE_DIR, 'main'), 
+    os.path.join(BASE_DIR, 'static'),
 ]
 # STATIC_ROOT = "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'main/static')
+    
 STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
